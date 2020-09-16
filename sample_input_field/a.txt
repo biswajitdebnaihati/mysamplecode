@@ -1,0 +1,35 @@
+<LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="2dp"
+                            android:background="@drawable/prf_info_bg"
+                            android:orientation="horizontal"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+
+                            >
+
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="Name : "
+                                android:textColor="@color/blue"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:enabled="false"
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:hint="Enter your Name"
+                                android:paddingLeft="2dp"
+                                android:paddingRight="2dp"
+                                android:textColor="@color/blue"
+                                android:textColorHint="@color/blue"
+                                android:textSize="14sp"
+                                android:inputType="textPersonName"/>
+                        </LinearLayout>

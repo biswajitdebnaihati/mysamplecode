@@ -1,0 +1,52 @@
+<com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/MyTextLabel2"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
+
+            <EditText
+                android:hint="Date of birth (MM-DD-YYYY)"
+                android:id="@+id/et_dob"
+                android:drawablePadding="10dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="5dp"
+                android:editable="false"
+                android:focusable="false"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+EditText etDob = findViewById(R.id.et_dob);
+
+etDob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                 int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                 int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                datepicker = new DatePickerDialog(InfoActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                String month = String.format("%02d" , (monthOfYear + 1));
+                                String day = String.format("%02d" , dayOfMonth);
+                                etDob.setText( month +"-"+day+ "-" + year);
+                                dd = dayOfMonth;
+                                yy = year;
+                                mm = monthOfYear+1;
+                            }
+                        }, year, month, day);
+                datepicker.show();
+            }
+        });

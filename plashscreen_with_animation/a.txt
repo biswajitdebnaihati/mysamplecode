@@ -1,0 +1,223 @@
+No# 6: Create a new animation resource file for animations in android
+Go to res folder and create a new folder in it with a name anim
+Create 3 new Resource files with names top_animation, bottom_animation, middle_animation inside anim folder
+
+link  : https://www.taimoorsikander.com/create-a-splash-screen-in-android-studio-with-animations/
+
+----------------->layout.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1f1f1d"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/first_line"
+            android:layout_width="20dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/abc_vector_test" />
+
+        <View
+            android:id="@+id/second_line"
+            android:layout_width="20dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/first_line"
+            android:background="@drawable/ic_launcher_background" />
+
+        <View
+            android:id="@+id/third_line"
+            android:layout_width="20dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/second_line"
+            android:background="@drawable/ic_launcher_foreground" />
+
+        <View
+            android:id="@+id/fourth_line"
+            android:layout_width="20dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/third_line"
+            android:background="@drawable/abc_vector_test" />
+
+        <View
+            android:id="@+id/fifth_line"
+            android:layout_width="20dp"
+            android:layout_height="220dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/fourth_line"
+            android:background="@drawable/ic_launcher_foreground" />
+
+        <View
+            android:id="@+id/sixth_line"
+            android:layout_width="20dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/fifth_line"
+            android:background="@drawable/abc_vector_test" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="A"
+            android:textColor="#fff"
+            android:textSize="150sp"
+
+             />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/tagLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50dp"
+                android:text="Android Developer"
+                android:textColor="#8A8585"
+                android:textSize="24sp"
+                app:fontFamily="cursive" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
+
+------------------>MainActivity.java
+
+package com.wishster.myapplication;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 5000;
+    //Hooks
+    View first,second,third,fourth,fifth,sixth;
+    TextView a, slogan;
+    //Animations
+    Animation topAnimantion,bottomAnimation,middleAnimation;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
+        //Hooks
+        first = findViewById(R.id.first_line);
+        second = findViewById(R.id.second_line);
+        third = findViewById(R.id.third_line);
+        fourth = findViewById(R.id.fourth_line);
+        fifth = findViewById(R.id.fifth_line);
+        sixth = findViewById(R.id.sixth_line);
+        a = findViewById(R.id.a);
+        slogan = findViewById(R.id.tagLine);
+
+        //Animation Calls
+        topAnimantion = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        middleAnimation = AnimationUtils.loadAnimation(this, R.anim.middle_animation);
+
+        //-----------Setting Animations to the elements of Splash
+
+        first.setAnimation(topAnimantion);
+        second.setAnimation(topAnimantion);
+        third.setAnimation(topAnimantion);
+        fourth.setAnimation(topAnimantion);
+        fifth.setAnimation(topAnimantion);
+        sixth.setAnimation(topAnimantion);
+        a.setAnimation(middleAnimation);
+        slogan.setAnimation(bottomAnimation);
+
+        //Splash Screen Code to call new Activity after some time
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(MainActivity.this, secondActivity.class);
+                startActivity(intent);
+                finish();*/
+            }
+        }, SPLASH_TIME_OUT);
+    }
+}
+
+------------------->bottom_animation.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1500"
+        android:fromXDelta="0%"
+        android:fromYDelta="-500%" />
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0" />
+</set>
+
+------------------->middle_animation.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1500"
+        android:fromXDelta="0%"
+        android:fromYDelta="-500%" />
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0" />
+</set>
+------------------->top_animation.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1500"
+        android:fromXDelta="0%"
+        android:fromYDelta="-500%" />
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0" />
+</set>

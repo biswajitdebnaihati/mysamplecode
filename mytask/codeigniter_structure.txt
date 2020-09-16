@@ -1,0 +1,101 @@
+1.------------------------
+
+<?php
+class Main_model extends CI_Model 
+   { 
+      public function test()
+	  { 
+         echo 'Model';
+                $query = $this->db->get('abcd', 10);
+                return $query->result();
+
+
+		
+      } 
+   } 
+ 2......................................
+myview.php
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><html>
+<head>
+<title>Display records</title>
+</head>
+ 
+<body>
+<table width="600" border="1" cellspacing="5" cellpadding="5">
+  <tr style="background:#CCC">
+    <th>Sr No</th>
+    <th>First_name</th>
+    <th>Last_name</th>
+    <th>Email Id</th>
+	<th>Delete</th>
+	<th>$jsonArray = json_decode(file_get_contents('php://input'),true); 
+</th>
+
+3.......................................
+
+hello.php
+
+<?php
+class Hello extends CI_Controller {
+   
+
+	
+	public function index()
+        {
+				$this->load->model("Main_model");
+				$data1=$this->Main_model->test();
+				$data=$data1[0];
+//echo $data[0]->name;
+				$this->load->view('myview', $data);
+
+				
+        }
+		
+		public function check(){
+        
+		//{"a":"b"}
+			$jsonArray = json_decode(file_get_contents('php://input'),true);
+			//echo file_get_contents('php://input');
+			$sss=$jsonArray["kol"];
+			echo $sss["mum"];
+//var_dump($jsonArray);
+
+
+echo "-----------";
+//var_dump($dd);
+		}
+        public function about()
+        {
+			$jsonArray = json_decode(file_get_contents('php://input'),true);
+			//echo file_get_contents('php://input');
+			var_dump($jsonArray);
+
+echo('-------------------');
+
+
+$form = $this->input->post();
+        var_dump($form);
+
+                echo 'Tutorial Site!';
+				
+				$json_request_body = file_get_contents('php://input');
+				//$data = json_decode(json_request_body, true);
+$tarray = json_decode($json_request_body);
+var_dump($json_request_body);
+
+$str = $json_request_body;
+echo trim($str, '"');
+
+
+
+				//print_r($tarray);
+
+        }
+}
+
+4................................
+$config['base_url'] = 'http://localhost/ci/bcit-ci-CodeIgniter-b73eb19/';
+set database
+  

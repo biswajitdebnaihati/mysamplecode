@@ -1,0 +1,140 @@
+if required EditText in item
+https://stackoverflow.com/questions/35913557/how-to-add-all-values-of-edittexts-in-recyclerview-to-a-textview/35913558
+
+else
+
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
+<com.wishster.myrecycleviewtest.XRecycleView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/aa"
+        app:isName="true"
+        app:customViewTitle="My Title"
+        app:customViewSubtitle="My Subtitle"
+        tools:ignore="MissingConstraints" />
+---------------------------------->MainActivity.java
+package com.wishster.myrecycleviewtest;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+
+public class MainActivity extends AppCompatActivity {
+    androidx.recyclerview.widget.RecyclerView recyclerView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        recyclerView=findViewById(R.id.request_rv);
+
+        MyListData[] myListData = new MyListData[] {
+                new MyListData("Email", android.R.drawable.ic_dialog_email),
+                new MyListData("Info", android.R.drawable.ic_dialog_info),
+                new MyListData("Delete", android.R.drawable.ic_delete),
+                new MyListData("Dialer", android.R.drawable.ic_dialog_dialer),
+                new MyListData("Alert", android.R.drawable.ic_dialog_alert),
+                new MyListData("Map", android.R.drawable.ic_dialog_map),
+                new MyListData("Email", android.R.drawable.ic_dialog_email),
+                new MyListData("Info", android.R.drawable.ic_dialog_info),
+                new MyListData("Delete", android.R.drawable.ic_delete),
+                new MyListData("Dialer", android.R.drawable.ic_dialog_dialer),
+                new MyListData("Alert", android.R.drawable.ic_dialog_alert),
+                new MyListData("Map", android.R.drawable.ic_dialog_map),
+        };
+        TestAdapter adapter = new TestAdapter(myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
+}
+
+----------------------------------------------------------------------------------------------------
+MyListData.java
+public class MyListData{
+    private String description;
+    private int imgId;
+    public MyListData(String description, int imgId) {
+        this.description = description;
+        this.imgId = imgId;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public int getImgId() {
+        return imgId;
+    }
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
+    }
+}
+
+-----------------------------------------------
+
+TestAdapter.java
+package com.wishster.myrecycleviewtest;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+class TestAdapter extends  RecyclerView.Adapter<TestAdapter.ViewHolder> {
+    private MyListData[] listdata;
+    public TestAdapter(MyListData[] listdata)
+    {
+        this.listdata = listdata;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View listItem= layoutInflater.inflate(R.layout.items, parent, false);
+        ViewHolder viewHolder = new ViewHolder(listItem);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final MyListData myListData = listdata[position];
+        holder.textView.setText(listdata[position].getDescription());
+        holder.imageView.setImageResource(listdata[position].getImgId());
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(),"click on item: "+myListData.getDescription(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return listdata.length;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imageView;
+        public TextView textView;
+        public RelativeLayout relativeLayout;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            this.textView = (TextView) itemView.findViewById(R.id.textView);
+            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout);
+        }
+    }
+}
+

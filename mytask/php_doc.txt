@@ -1,0 +1,72 @@
+json object input
+public function check(){
+        
+		//{"a":"b"}
+			$jsonArray = json_decode(file_get_contents('php://input'),true);
+			//echo file_get_contents('php://input');
+			echo $jsonArray["a"];
+			//var_dump($jsonArray);
+		
+		
+		
+
+//********************
+
+
+{
+	"a": "b",
+	"c": [{
+			"dd": "ee"
+		},
+		{
+			"dd": "gg"
+		}
+	],
+	
+	}
+
+
+
+
+public function check(){
+        
+		//{"a":"b"}
+			$jsonArray = json_decode(file_get_contents('php://input'),true);
+			//echo file_get_contents('php://input');
+			echo $jsonArray["a"];
+//var_dump($jsonArray);
+
+$dd=$jsonArray["c"];
+foreach($dd as $value){
+	
+    echo $value["dd"] . "<br>";
+}	
+
+//******************
+{
+	"a": "b",
+	"c": [{
+			"dd": "ee"
+		},
+		{
+			"dd": "gg"
+		}
+	],
+	"kol":{"mum":"del"}
+	}
+	
+	public function check(){
+        
+		//{"a":"b"}
+			$jsonArray = json_decode(file_get_contents('php://input'),true);
+			//echo file_get_contents('php://input');
+			$sss=$jsonArray["kol"];
+			echo $sss["mum"];
+//var_dump($jsonArray);
+
+
+echo "-----------";
+//var_dump($dd);
+		}
+
+	

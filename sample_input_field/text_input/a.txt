@@ -1,0 +1,23 @@
+<com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFF"
+                android:theme="@style/MyTextLabel"
+                android:layout_marginLeft="4dp">
+
+                <EditText
+                    android:imeOptions="actionSend"
+                    android:id="@+id/et_psw"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="#FFF"
+                    android:hint="Password"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="12dp"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+// Material Design
+    implementation 'com.google.android.material:material:1.0.0'
